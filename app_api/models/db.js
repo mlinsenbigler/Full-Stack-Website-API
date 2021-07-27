@@ -25,6 +25,16 @@ mongoose.connection.on('disconnected', () => {
   console.log('Mongoose disconnected');
 });
 
+if (process.platform === 'win32'){
+  const rl = readLine.createInterface ({
+    input: process.stdin,
+    output: process.stdout
+  });
+  rl.on ('SIGINT', () => {
+    process.emit ("SIGINT");
+  });
+}
+
 const gracefulShutdown = (msg, callback) => {
   mongoose.connection.close( () => {
     console.log(`Mongoose disconnected through ${msg}`);
@@ -50,5 +60,7 @@ process.on('SIGTERM', () => {
     process.exit(0);
   });
 });
+
+connect();
 
 require('./travlr');
