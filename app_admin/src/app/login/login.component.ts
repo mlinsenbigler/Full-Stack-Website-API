@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     name: '',
     email: '',
     password: ''
-};
+  };
 
   constructor(
     private router: Router,
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
 
   private doLogin(): void {
     this.authenticationService.login(this.credentials)
-      .then(() => this.router.navigateByUrl('#'))
+      .then(() => this.router.navigateByUrl('list-trips'))
       .catch((message) => this.formError = message);
   }
 }

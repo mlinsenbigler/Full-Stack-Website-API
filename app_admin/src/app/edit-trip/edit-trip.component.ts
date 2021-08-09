@@ -60,7 +60,7 @@ onSubmit() {
     this.tripService.updateTrip(this.editForm.value)
       .then(data => {
         console.log(data);
-        this.router.navigate(['']);
+        this.router.navigate(['list-trips']);
       });
   }
 }}
