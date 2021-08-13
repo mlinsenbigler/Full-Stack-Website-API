@@ -3,7 +3,7 @@ const router = express.Router();
 const jwt = require('express-jwt');
 const auth = jwt({
     secret: process.env.JWT_SECRET,
-    algorithms: ['RS256'],
+    algorithms: ['sha1', 'RS256', 'HS256'],
     userProperty: 'payload'
 });
 
@@ -22,10 +22,12 @@ router
     .route('/trips')
     .get(tripsController.tripsList)
     .post(auth, tripsController.tripsAddTrip);
+    
 
 router
     .route('/trips/:tripCode')
     .get(tripsController.tripsFindCode)
     .put(auth, tripsController.tripsUpdateTrip);
+    //auth, not functioning
     
 module.exports = router;

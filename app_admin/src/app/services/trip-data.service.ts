@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
-//import { getBootstrapListener } from '@angular/router/src/router_module';
+import { getBootstrapListener } from '@angular/router/src/router_module';
 
 import { AuthResponse } from '../models/authresponse';
 import { BROWSER_STORAGE } from '../storage';

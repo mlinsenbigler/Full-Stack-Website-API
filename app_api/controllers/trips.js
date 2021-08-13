@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-const Model = mongoose.model('trips');
+const Trip = mongoose.model('trips');
 const User = mongoose.model('users');
 
 // GET: /trips - lists filter for all
 const tripsList = async (req, res) => {
-    Model
+    Trip
         .find({}) // empty filter for all
         .exec((err, trips) => {
             if (!trips) {
@@ -21,11 +21,11 @@ const tripsList = async (req, res) => {
                     .json(trips);
             }
         });
-};
+}
 
 // GET: /trips/:tripCode - returns a single stip
 const tripsFindCode = async (req, res) => {
-    Model
+    Trip
         .find({ 'code': req.params.tripCode })
         .exec((err, trip) => {
             if (!trip) {
@@ -45,10 +45,10 @@ const tripsFindCode = async (req, res) => {
 }
 
 const tripsAddTrip = async (req, res) => {
-    console.log('tripsAddTrip invoked with:\n' + req.body);
-    getUser(req, res,
+    console.log(req.body);
+    getUser(req, res,   //authentication will not work without proper algorithm coding
         (req, res) => {
-    Model
+    Trip
         .create({
             code: req.body.code,
             name: req.body.name,
@@ -76,9 +76,9 @@ const tripsAddTrip = async (req, res) => {
 
 const tripsUpdateTrip = async (req, res) => {
     console.log(req.body);
-    getUser(req, res,
+    getUser(req, res, //authentication will not work without proper algorithm coding
         (req, res) => {
-        Model
+        Trip
         .findOneAndUpdate({ 'code': req.params.tripCode }, {
             code: req.body.code,
             name: req.body.name,
@@ -109,7 +109,7 @@ const tripsUpdateTrip = async (req, res) => {
             return res
                 .status(500) // server error
                 .json(err);
-        });
+        })
     }
     )
 }
@@ -135,8 +135,8 @@ const getUser = (req, res, callback) => {
         return res
             .status(404)
             .json({ 'message': 'User not found'});
-    }  
-};
+    } 
+}
 
 module.exports = {
     tripsList,
@@ -144,4 +144,4 @@ module.exports = {
     tripsAddTrip,
     tripsUpdateTrip,
     getUser
-};
+}
