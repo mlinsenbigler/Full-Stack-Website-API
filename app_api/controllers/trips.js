@@ -71,7 +71,7 @@ const tripsAddTrip = async (req, res) => {
                 }
             });
         }
-    );
+    )
 }
 
 const tripsUpdateTrip = async (req, res) => {
